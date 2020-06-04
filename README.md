@@ -24,7 +24,15 @@
 </dependencies>
 ```
 ### step2.配置AK/SK
-![mark](https://img.zouchanglin.cn///20200604/NzAeTTgkKCJ7.png)
+```yml
+qiniu:
+  access-key: 79sjsihduednaxnjdnekjnde
+  secret-key: xnjdnekjnde21l3kne4br4
+  # 空间配置
+  bucket-name: image-server
+  # 机房配置(可减少一次请求，提升性能，可选项) huadong、huabei、huanan、beimei、xinjiapo
+  region: huadong
+```
 
 ### step3.注入组件
 ```java
