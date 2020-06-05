@@ -1,21 +1,30 @@
+![logo](logo.png)
 
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zouchanglin/storage-spring-boot-starter)
-![JitPack](https://img.shields.io/jitpack/v/github/zouchanglin/storage-spring-boot-starter)
+<div align="center">
+Immediately enjoy the easy-to-use storage service, perfect support asynchronous with callback strategy.
 
-# 项目简介
-本项目集成了七牛云的对象存储服务SDK，阿里云的OOS存储服务SDK，并且简化了繁琐的配置，让用户到享受开箱即用的体验。后期将支持更多存储服务平台，并且将引入文件存储管理引擎，帮助用户快速搭建起基础服务设施。
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zouchanglin/storage-spring-boot-starter)![JitPack](https://img.shields.io/jitpack/v/github/zouchanglin/storage-spring-boot-starter)[![GitHub license](https://img.shields.io/github/license/zouchanglin/storage-spring-boot-starter?label=license)](https://github.com/zouchanglin/storage-spring-boot-starter/blob/master/LICENSE)
 
-# 使用必看
+</div>
 
-文件上传分为两种类型，一种是客户端上传，即用户终端设备Android/iOS或者React、Vue、Angular等前端应用自行上传文件至七牛云。另一种是服务端上传，即服务器端直接上传文件至七牛云。
+English | [简体中文](./README.zh-CN.md) 
 
-* 客户端上传：需要从服务端获取对应的Token，Token只能使用一次，如果是断点续传，Token的有效期是一个小时
-* 服务端上传：同样需要服务器自己获取Token，利用Token进行文件上传操作，如果是断点续传，Token的有效期是一个小时。
+# Project introduction
+This project integrates seven NiuYun object storage services SDK, ali cloud OOS storage services SDK, and simplifies the complicated configuration, let users to enjoy the out-of-the-box experience.
+Later will support more storage service platform, and will introduce file storage management engine, help users quickly set up infrastructure services.
 
-所以为了解决文件存储API的复杂性问题，如果是为了客户端上传的需求，则引入QiNiuAuthService，方便各种Token的获取。如果是服务器端上传，则直接引入QiNiuUploadService即可。
+# Use will see
 
-# 快速开始
-### step1.引入依赖
+File upload was divided into two types, one is the client upload, namely the user terminal device Android/iOS or React, Vue, Angular and more the front application to upload files to seven NiuYun.
+The other is a server-side upload, namely the server upload files to seven NiuYun directly.
+
+* the client upload: need to get the corresponding Token from the service side, Token can be used only once, if it is a breakpoint continuingly, Token is valid for one hour.
+* server upload: also need the server access Token itself, the use of Token for file upload operation, if it is a breakpoint continuingly, Token is valid for one hour.
+
+So, in order to solve the problem of the complexity of file storage API, if is for the sake of the demand of the client to upload, then introduce QiNiuAuthService, convenient various access Token. If it is the server upload directly introducing QiNiuUploadService can.
+
+# Quick start
+### step1. Introduction of dependences
 
 > **Maven**
 
@@ -52,21 +61,22 @@ dependencies {
 
 
 
-### step2.配置AK/SK
+### step2. configuration AK/SK
 
-在application.yml配置七牛/阿里云的AK、SK、存储空间、机房地址。机房地址属于可选项，配置了机房地址可以减少一次请求，提升交互效率，配置为如下即可，可选的机房华东(huadong)、华北(huabei)、华南(huanan)、北美(beimei)、东南亚(xinjiapo）：
+In application, yml configuration seven cows/ali cloud AK, SK, storage space, room address.
+Room address belongs to option, the configuration room address can reduce request at a time, improve efficiency of interaction, can be configured as the following, optional room (huadong) east China, north China, huabei), south China (huanan) (beimei), North America, southeast Asia, xinjiapo:
 
 ```yml
 qiniu:
-  access-key: 79sjsihduednaxnjdnekjnde
-  secret-key: xnjdnekjnde21l3kne4br4
-  # 空间配置
-  bucket-name: image-server
-  # 机房配置 huadong、huabei、huanan、beimei、xinjiapo
+  access-key: your service providers's access-key
+  secret-key: your service providers's secret-key
+  # Spatial configuration
+  bucket-name: your bucker bucket-name
+  # Computer region configuration, example huadong、huabei、huanan、beimei、xinjiapo
   region: huadong
 ```
 
-### step3.注入组件
+### step3. Injection components
 
 ```java
 @Service
@@ -79,12 +89,109 @@ public class DemoService {
 }
 ```
 
-# Getting Started
-### Reference Documentation
-For further reference, please consider the following sections:
+### step4. Enjoy the process
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/maven-plugin/)
-* [Spring Configuration Processor](https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/reference/htmlsingle/#configuration-metadata-annotation-processor)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/reference/htmlsingle/#using-boot-devtools)
+Enjoy benefits of simplified configuration.
 
+
+
+# API reference
+
+
+### Get Token
+
+#### 1、Get generally token
+
+```java
+String token = qiNiuAuthService.getToken();
+```
+
+#### 2、Get filecover Token
+
+```java
+String oldFileName = "example.file";
+String token = qiNiuAuthService.getTokenByCover(oldFileName);
+```
+
+#### 3、Get carry callback url's token
+
+```java
+String callBackUrl = "http://example.com/fileupload/callback";
+String token = qiNiuAuthService.getTokenCallBack(callBackUrl);
+```
+
+Set the callback address will immediately return, return the data is NULL. Callback interface to receive data as follows:
+
+```json
+{
+	"bucket": "your bucket",
+	"ext": ".txt",
+	"fname": "example.txt",
+	"fprefix": "example",
+	"fsize": 1024,
+	"hash": "FmFit5fEfTPsDLSyeD3OoSKqsGpS",
+	"key": "example.md",
+	"mimeType": "application/octet-stream",
+	"uuid": "8875ea3f-b93f-4b58-9f2f-54fcd68ccab3"
+}
+```
+
+About the JSON fields can refer to the explanation of [document ](https://developer.qiniu.com/kodo/manual/1235/vars#magicvar).
+
+### File Upload
+
+#### 4、Local file upload
+
+```java
+// Local file path
+String localFilePath = "/root/example.txt";
+// The target file name
+String descFileName = "myQiNiuExample.txt";
+
+ReturnBody returnBody = qiNiuUploadService.uploadLocalFile(localFilePath, descFileName, null);
+```
+
+#### 5、ByteArray upload
+
+```java
+byte[] bytes = "ExampleString".getBytes();
+// The target file name
+String descFileName = "myQiNiuExample";
+
+ReturnBody returnBody = qiNiuUploadService.uploadByteArray(bytes, descFileName, null);
+```
+
+#### 6、Stream upload
+
+```java
+// The target file name
+String descFileName = "myQiNiuExample";
+
+byte[] bytes = "ExampleString".getBytes();
+ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
+
+ReturnBody returnBody = qiNiuUploadService.uploadStream(stream, descFileName, null);
+```
+
+#### 7、Three upload way callback
+
+上面的示例代码演示了无回调URL的情况，即qiNiuUploadService.upload*()的第三个参数都是NULL。
+
+```java
+// Local file path
+String localFilePath = "/root/example.txt";
+// // The target file name
+String descFileName = "myQiNiuExample.txt";
+// callback url
+String callBackUrl = "http://example.com/upload/callback";
+
+qiNiuUploadService.uploadLocalFile(localFilePath, descFileName, callBackUrl);
+```
+
+The above example，http://example.com/upload/callback Interface to the received data is received in the form of POST ReturnBody object. Reference 3, Get carry callback url's token.
+
+# Version update
+
+### V1.0
+
+Support the seven NiuYun three Token, upload files, an array of bytes, flows and breakpoint continuingly support.
