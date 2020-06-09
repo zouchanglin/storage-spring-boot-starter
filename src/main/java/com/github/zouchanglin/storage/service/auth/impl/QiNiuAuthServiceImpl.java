@@ -46,4 +46,9 @@ public class QiNiuAuthServiceImpl implements QiNiuAuthService {
         long expireSeconds = 3600;
         return auth.uploadToken(qiNiuProperties.getBucketName(), null, expireSeconds, putPolicy);
     }
+
+    @Override
+    public Auth getAuth() {
+        return Auth.create(qiNiuProperties.getAccessKey(), qiNiuProperties.getSecretKey());
+    }
 }

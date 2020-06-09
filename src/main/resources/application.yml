@@ -3,3 +3,4 @@ qiniu:
   bucket-name:
   secret-key:
   region:
+  domain-name: img.zouchanglin.cn

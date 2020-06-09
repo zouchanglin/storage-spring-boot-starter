@@ -28,6 +28,19 @@ public class QiNiuProperties {
      */
     private String region;
 
+    /**
+     * 仓库的域名
+     */
+    private String domainName;
+
+    public String getDomainName() {
+        return domainName;
+    }
+
+    public void setDomainName(String domainName) {
+        this.domainName = domainName;
+    }
+
     public String getAccessKey() {
         return accessKey;
     }

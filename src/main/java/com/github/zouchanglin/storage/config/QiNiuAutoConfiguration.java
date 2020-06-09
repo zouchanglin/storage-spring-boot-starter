@@ -4,6 +4,8 @@ package com.github.zouchanglin.storage.config;
 
 import com.github.zouchanglin.storage.service.auth.QiNiuAuthService;
 import com.github.zouchanglin.storage.service.auth.impl.QiNiuAuthServiceImpl;
+import com.github.zouchanglin.storage.service.download.QiNiuDownloadService;
+import com.github.zouchanglin.storage.service.download.impl.QiNiuDownloadServiceImpl;
 import com.github.zouchanglin.storage.service.upload.QiNiuUploadService;
 import com.github.zouchanglin.storage.service.upload.impl.QiNiuUploadServiceImpl;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,5 +33,10 @@ public class QiNiuAutoConfiguration {
     @Bean
     QiNiuUploadService qiNiuUploadService() {
         return new QiNiuUploadServiceImpl();
+    }
+
+    @Bean
+    QiNiuDownloadService qiNiuDownloadService() {
+        return new QiNiuDownloadServiceImpl();
     }
 }

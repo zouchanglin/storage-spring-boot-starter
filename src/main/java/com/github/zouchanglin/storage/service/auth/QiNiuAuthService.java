@@ -1,5 +1,7 @@
 package com.github.zouchanglin.storage.service.auth;
 
+import com.qiniu.util.Auth;
+
 /**
  * @author zouchanglin
  * @date 2020/6/4
@@ -26,4 +28,10 @@ public interface QiNiuAuthService {
      * @return token
      */
     String getTokenCallBack(String callBackUrl);
+
+    /**
+     * 获取Auth验证对象
+     * @return {@link Auth}
+     */
+    Auth getAuth();
 }
