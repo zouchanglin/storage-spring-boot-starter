@@ -175,7 +175,7 @@ ReturnBody returnBody = qiNiuUploadService.uploadStream(stream, descFileName, nu
 
 #### 7、Three upload way callback
 
-上面的示例代码演示了无回调URL的情况，即qiNiuUploadService.upload*()的第三个参数都是NULL。
+The above example code demonstrates no callback URL, namely qiNiuUploadService.upload*()'s the third parameters is all NULL.
 
 ```java
 // Local file path
