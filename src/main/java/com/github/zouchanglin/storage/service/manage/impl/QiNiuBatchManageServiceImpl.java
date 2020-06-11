@@ -9,6 +9,7 @@ import com.qiniu.storage.model.BatchStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author zouchanglin
@@ -35,6 +36,66 @@ public class QiNiuBatchManageServiceImpl implements QiNiuBatchManageService {
             Response response = bucketManager.batch(batchOperations);
             BatchStatus[] batchStatusList = response.jsonToObject(BatchStatus[].class);
             for(BatchStatus batchStatus: batchStatusList){
+                if(200 == batchStatus.code) retNumber++;
+            }
+        } catch (QiniuException qiniuException) {
+            qiniuException.printStackTrace();
+        }
+        return retNumber;
+    }
+
+    @Override
+    public int batchDeleteFile(String[] keys) {
+        BucketManager.BatchOperations batchOperations = new BucketManager.BatchOperations();
+        batchOperations.addDeleteOp(qiNiuProperties.getBucketName(), keys);
+        int retNumber = 0;
+        try {
+            Response response = bucketManager.batch(batchOperations);
+            BatchStatus[] batchStatusList = response.jsonToObject(BatchStatus[].class);
+            for(BatchStatus batchStatus: batchStatusList){
+                if(200 == batchStatus.code){
+                    retNumber++;
+                }
+            }
+        } catch (QiniuException qiniuException){
+            qiniuException.printStackTrace();
+        }
+        return retNumber;
+    }
+
+    @Override
+    public int batchRenameFile(Map<String, String> nameMap) {
+        BucketManager.BatchOperations batchOperations = new BucketManager.BatchOperations();
+        Set<String> keySet = nameMap.keySet();
+        int retNumber = 0;
+        for (String key : keySet) {
+            batchOperations.addMoveOp(qiNiuProperties.getBucketName(), key, qiNiuProperties.getBucketName(), nameMap.get(key));
+        }
+        try {
+            Response response = bucketManager.batch(batchOperations);
+            BatchStatus[] batchStatusList = response.jsonToObject(BatchStatus[].class);
+            for(BatchStatus batchStatus: batchStatusList){
+                if(200 == batchStatus.code) retNumber++;
+            }
+        } catch (QiniuException qiniuException) {
+            qiniuException.printStackTrace();
+        }
+
+        return retNumber;
+    }
+
+    @Override
+    public int batchCopyFile(String[] keys, String suffix) {
+        BucketManager.BatchOperations batchOperations = new BucketManager.BatchOperations();
+        for (String key : keys) {
+            batchOperations.addCopyOp(qiNiuProperties.getBucketName(), key, qiNiuProperties.getBucketName(), key + suffix);
+        }
+        int retNumber = 0;
+        Response response;
+        try {
+            response = bucketManager.batch(batchOperations);
+            BatchStatus[] batchStatusList = response.jsonToObject(BatchStatus[].class);
+            for(BatchStatus batchStatus : batchStatusList){
                 if(200 == batchStatus.code) retNumber++;
             }
         } catch (QiniuException qiniuException) {

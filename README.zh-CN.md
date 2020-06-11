@@ -3,7 +3,7 @@
 <div align="center">
 立马享受到简单易用的存储服务，完美支持异步与回调策略
 
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zouchanglin/storage-spring-boot-starter)![JitPack](https://img.shields.io/jitpack/v/github/zouchanglin/storage-spring-boot-starter)[![GitHub license](https://img.shields.io/github/license/zouchanglin/storage-spring-boot-starter?label=license)](https://github.com/zouchanglin/storage-spring-boot-starter/blob/master/LICENSE)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zouchanglin/storage-spring-boot-starter)   ![JitPack](https://img.shields.io/jitpack/v/github/zouchanglin/storage-spring-boot-starter)[![GitHub license](https://img.shields.io/github/license/zouchanglin/storage-spring-boot-starter?label=license)](https://github.com/zouchanglin/storage-spring-boot-starter/blob/master/LICENSE)
 
 </div>
 
