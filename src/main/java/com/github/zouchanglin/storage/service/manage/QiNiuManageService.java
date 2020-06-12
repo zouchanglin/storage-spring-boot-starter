@@ -18,6 +18,20 @@ public interface QiNiuManageService {
     List<FileInfo> getAllFileList();
 
     /**
+     * 获取指定前缀文件名的文件信息列表
+     * @param prefix 文件名前缀
+     * @return 文件信息列表
+     */
+    List<FileInfo> getFilesByPrefix(String prefix);
+
+    /**
+     * 指定目录分隔符，列出所有公共前缀（模拟列出目录效果）。缺省值为空字符串
+     * @param publicPrefix 公共前缀
+     * @return 文件信息列表
+     */
+    List<FileInfo> getFilesByPublicPrefix(String publicPrefix);
+
+    /**
      * 获取文件信息
      * @param key 文件主键(文件名)
      * @return 文件信息 {@link FileInfo}

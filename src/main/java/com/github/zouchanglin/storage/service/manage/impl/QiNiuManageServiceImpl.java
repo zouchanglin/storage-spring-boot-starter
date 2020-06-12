@@ -42,6 +42,36 @@ public class QiNiuManageServiceImpl implements QiNiuManageService {
     }
 
     @Override
+    public List<FileInfo> getFilesByPrefix(String prefix) {
+        // 每次迭代的长度限制，最大1000，推荐值 1000
+        int limit = 1000;
+        String bucketName = qiNiuProperties.getBucketName();
+        BucketManager.FileListIterator listIterator = bucketManager.createFileListIterator(bucketName, prefix, limit, "");
+        List<FileInfo> retList = new ArrayList<>();
+        while(listIterator.hasNext()){
+            //处理获取的file list结果
+            FileInfo[] items = listIterator.next();
+            retList.addAll(Arrays.asList(items));
+        }
+        return retList;
+    }
+
+    @Override
+    public List<FileInfo> getFilesByPublicPrefix(String publicPrefix) {
+        // 每次迭代的长度限制，最大1000，推荐值 1000
+        int limit = 1000;
+        String bucketName = qiNiuProperties.getBucketName();
+        BucketManager.FileListIterator listIterator = bucketManager.createFileListIterator(bucketName, "", limit, publicPrefix);
+        List<FileInfo> retList = new ArrayList<>();
+        while(listIterator.hasNext()){
+            //处理获取的file list结果
+            FileInfo[] items = listIterator.next();
+            retList.addAll(Arrays.asList(items));
+        }
+        return retList;
+    }
+
+    @Override
     public FileInfo getFileInfoByKey(String key) {
         try {
             return bucketManager.stat(qiNiuProperties.getBucketName(), key);
