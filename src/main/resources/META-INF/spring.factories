@@ -1,2 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.github.zouchanglin.storage.config.QiNiuAutoConfiguration
+  com.github.zouchanglin.storage.config.QiNiuAutoConfiguration,\
+  com.github.zouchanglin.storage.service.upload.QiNiuUploadFactory,\
+  com.github.zouchanglin.storage.utils.RegionSelector

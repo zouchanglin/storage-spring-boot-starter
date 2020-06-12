@@ -2,9 +2,7 @@
 
 <div align="center">
 Immediately enjoy the easy-to-use storage service, perfect support asynchronous with callback strategy.
-
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zouchanglin/storage-spring-boot-starter)![JitPack](https://img.shields.io/jitpack/v/github/zouchanglin/storage-spring-boot-starter)[![GitHub license](https://img.shields.io/github/license/zouchanglin/storage-spring-boot-starter?label=license)](https://github.com/zouchanglin/storage-spring-boot-starter/blob/master/LICENSE)
-
+<hr>
 </div>
 
 English | [简体中文](./README.zh-CN.md) 

@@ -6,66 +6,66 @@ import com.qiniu.storage.model.FileInfo;
 import java.util.List;
 
 /**
- * ÆßÅ£ÔÆµ¥ÎÄ¼ş²Ù×÷·şÎñ
+ * ä¸ƒç‰›äº‘å•æ–‡ä»¶æ“ä½œæœåŠ¡
  * @author zouchanglin
  * @date 2020/6/9
  */
 public interface QiNiuManageService {
     /**
-     * »ñÈ¡È«²¿ÎÄ¼şĞÅÏ¢ÁĞ±í
-     * @return ÎÄ¼şĞÅÏ¢ÁĞ±í
+     * è·å–å…¨éƒ¨æ–‡ä»¶ä¿¡æ¯åˆ—è¡¨
+     * @return æ–‡ä»¶ä¿¡æ¯åˆ—è¡¨
      */
     List<FileInfo> getAllFileList();
 
     /**
-     * »ñÈ¡ÎÄ¼şĞÅÏ¢
-     * @param key ÎÄ¼şÖ÷¼ü(ÎÄ¼şÃû)
-     * @return ÎÄ¼şĞÅÏ¢ {@link FileInfo}
+     * è·å–æ–‡ä»¶ä¿¡æ¯
+     * @param key æ–‡ä»¶ä¸»é”®(æ–‡ä»¶å)
+     * @return æ–‡ä»¶ä¿¡æ¯ {@link FileInfo}
      */
     FileInfo getFileInfoByKey(String key);
 
     /**
-     * ĞŞ¸ÄÎÄ¼şÀàĞÍ
-     * @param key ÎÄ¼şÖ÷¼ü(ÎÄ¼şÃû)
-     * @param newMimeType ÎÄ¼şÀàĞÍ
-     * @return  ĞŞ¸ÄÎÄ¼şÀàĞÍÊÇ·ñ³É¹¦
+     * ä¿®æ”¹æ–‡ä»¶ç±»å‹
+     * @param key æ–‡ä»¶ä¸»é”®(æ–‡ä»¶å)
+     * @param newMimeType æ–‡ä»¶ç±»å‹
+     * @return  ä¿®æ”¹æ–‡ä»¶ç±»å‹æ˜¯å¦æˆåŠŸ
      */
     boolean changeMimeType(String key, String newMimeType);
 
     /**
-     * ÖØÃüÃûÎÄ¼ş
-     * @param key ÎÄ¼şÖ÷¼ü(ÎÄ¼şÃû)
-     * @param newKey ĞÂÎÄ¼şÃû
-     * @return  ÖØÃüÃûÊÇ·ñ³É¹¦
+     * é‡å‘½åæ–‡ä»¶
+     * @param key æ–‡ä»¶ä¸»é”®(æ–‡ä»¶å)
+     * @param newKey æ–°æ–‡ä»¶å
+     * @return  é‡å‘½åæ˜¯å¦æˆåŠŸ
      */
     boolean renameFile(String key, String newKey);
 
     /**
-     * ¸´ÖÆÎÄ¼ş
-     * @param key ÎÄ¼şÖ÷¼ü(ÎÄ¼şÃû)
-     * @param copyKey ¸´ÖÆ³öµÄĞÂÎÄ¼şµÄÎÄ¼şÃû
-     * @return ¸´ÖÆÊÇ·ñ³É¹¦
+     * å¤åˆ¶æ–‡ä»¶
+     * @param key æ–‡ä»¶ä¸»é”®(æ–‡ä»¶å)
+     * @param copyKey å¤åˆ¶å‡ºçš„æ–°æ–‡ä»¶çš„æ–‡ä»¶å
+     * @return å¤åˆ¶æ˜¯å¦æˆåŠŸ
      */
     boolean copyFile(String key, String copyKey);
 
     /**
-     * É¾³ıÎÄ¼ş
-     * @param key ÎÄ¼şÖ÷¼ü(ÎÄ¼şÃû)
-     * @return É¾³ıÊÇ·ñ³É¹¦
+     * åˆ é™¤æ–‡ä»¶
+     * @param key æ–‡ä»¶ä¸»é”®(æ–‡ä»¶å)
+     * @return åˆ é™¤æ˜¯å¦æˆåŠŸ
      */
     boolean deleteFile(String key);
 
     /**
-     * ÉèÖÃÎÄ¼ş¹ıÆÚÊ±¼ä£¬»òÕß¸üĞÂÒÑÉèÖÃÁË¹ıÆÚÊ±¼äµ«ÉĞÎ´±»É¾³ıµÄÎÄ¼şµÄĞÂµÄ¹ıÆÚÊ±¼ä
-     * @param days µ¥Î»:Ìì
+     * è®¾ç½®æ–‡ä»¶è¿‡æœŸæ—¶é—´ï¼Œæˆ–è€…æ›´æ–°å·²è®¾ç½®äº†è¿‡æœŸæ—¶é—´ä½†å°šæœªè¢«åˆ é™¤çš„æ–‡ä»¶çš„æ–°çš„è¿‡æœŸæ—¶é—´
+     * @param days å•ä½:å¤©
      */
     void deleteAfterDays(String key, int days);
 
     /**
-     * ×¥È¡ÍøÂç×ÊÔ´µ½¿Õ¼ä
-     * @param url ÍøÂç×ÊÔ´URL
-     * @param key ÎÄ¼şÃû³Æ
-     * @return ×¥È¡½á¹û
+     * æŠ“å–ç½‘ç»œèµ„æºåˆ°ç©ºé—´
+     * @param url ç½‘ç»œèµ„æºURL
+     * @param key æ–‡ä»¶åç§°
+     * @return æŠ“å–ç»“æœ
      */
     FetchRet pullFileFromNetWork(String url, String key);
 }

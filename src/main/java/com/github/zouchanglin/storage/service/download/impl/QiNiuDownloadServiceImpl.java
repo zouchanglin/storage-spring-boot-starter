@@ -22,6 +22,7 @@ import java.net.URLEncoder;
 public class QiNiuDownloadServiceImpl implements QiNiuDownloadService {
     @Autowired
     private QiNiuProperties qiNiuProperties;
+
     @Autowired
     private QiNiuAuthService qiNiuAuthService;
 

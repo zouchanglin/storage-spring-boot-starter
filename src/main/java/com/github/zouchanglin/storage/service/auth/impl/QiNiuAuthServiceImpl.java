@@ -6,13 +6,11 @@ import com.github.zouchanglin.storage.service.upload.result.ReturnBody;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author zouchanglin
  * @date 2020/6/4
  */
-@Configuration
 public class QiNiuAuthServiceImpl implements QiNiuAuthService {
     private final QiNiuProperties qiNiuProperties;
 

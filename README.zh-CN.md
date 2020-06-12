@@ -2,9 +2,7 @@
 
 <div align="center">
 立马享受到简单易用的存储服务，完美支持异步与回调策略
-
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/zouchanglin/storage-spring-boot-starter)   ![JitPack](https://img.shields.io/jitpack/v/github/zouchanglin/storage-spring-boot-starter)[![GitHub license](https://img.shields.io/github/license/zouchanglin/storage-spring-boot-starter?label=license)](https://github.com/zouchanglin/storage-spring-boot-starter/blob/master/LICENSE)
-
+<hr>
 </div>
 
 [English](./README.md) | 简体中文
@@ -183,6 +181,17 @@ qiNiuUploadService.uploadLocalFile(localFilePath, descFileName, callBackUrl);
 ```
 
 上述例子中，http://example.com/upload/callback 接口接收的数据就是以POST形式接收的ReturnBody对象。参考3、获取带回调的Token中的JSON数据。
+
+### 文件(批量)管理
+
+#### 1、文件列表
+
+```java
+
+```
+
+
+
 
 # 版本更新
 

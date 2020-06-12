@@ -3,7 +3,7 @@ package com.github.zouchanglin.storage.utils;
 import com.github.zouchanglin.storage.config.QiNiuProperties;
 import com.qiniu.storage.Region;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 机房选择器
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date 2020/6/4
  */
 
-@Component
+@Configuration
 public class RegionSelector {
     private final QiNiuProperties qiNiuProperties;
 

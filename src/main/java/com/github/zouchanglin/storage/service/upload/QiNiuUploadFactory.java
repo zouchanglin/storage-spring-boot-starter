@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
  */
 @org.springframework.context.annotation.Configuration
 public class QiNiuUploadFactory {
+
     private final RegionSelector regionSelector;
     private final QiNiuAuthService qiNiuAuthService;
 
@@ -30,12 +31,12 @@ public class QiNiuUploadFactory {
     }
 
     @Bean
-    public UploadManager uploadManager(){
-        return new UploadManager(configuration());
+    public BucketManager bucketManager(){
+        return new BucketManager(qiNiuAuthService.getAuth(), new Configuration(regionSelector.selectRegion()));
     }
 
     @Bean
-    public BucketManager bucketManager(){
-        return new BucketManager(qiNiuAuthService.getAuth(), configuration());
+    public UploadManager uploadManager(){
+        return new UploadManager(new Configuration(regionSelector.selectRegion()));
     }
 }
