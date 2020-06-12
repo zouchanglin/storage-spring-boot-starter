@@ -23,19 +23,17 @@ import org.springframework.context.annotation.Configuration;
 public class QiNiuAutoConfiguration {
     private final QiNiuProperties qiNiuProperties;
 
-    private final QiNiuAuthService qiNiuAuthService;
-
-    private final com.qiniu.storage.Configuration configuration;
-
-    private final UploadManager uploadManager;
+    @Autowired
+    private QiNiuAuthService qiNiuAuthService;
 
     @Autowired
-    public QiNiuAutoConfiguration(QiNiuProperties qiNiuProperties, QiNiuAuthService qiNiuAuthService,
-                                  com.qiniu.storage.Configuration configuration, UploadManager uploadManager) {
+    private com.qiniu.storage.Configuration configuration;
+
+    @Autowired
+    private UploadManager uploadManager;
+
+    public QiNiuAutoConfiguration(QiNiuProperties qiNiuProperties) {
         this.qiNiuProperties = qiNiuProperties;
-        this.qiNiuAuthService = qiNiuAuthService;
-        this.configuration = configuration;
-        this.uploadManager = uploadManager;
     }
 
     @Bean
