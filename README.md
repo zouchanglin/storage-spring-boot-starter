@@ -38,7 +38,7 @@ So, in order to solve the problem of the complexity of file storage API, if is f
     <dependency>
         <groupId>com.github.zouchanglin</groupId>
         <artifactId>storage-spring-boot-starter</artifactId>
-        <version>v1.0</version>
+        <version>1.1</version>
     </dependency>
 </dependencies>
 ```
