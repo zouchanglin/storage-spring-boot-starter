@@ -1,4 +1,4 @@
-![logo](logo.png)
+![logo](https://img.zouchanglin.cn/storage-spring-boot-starter-logo.png)
 
 <div align="center">
 立马享受到简单易用的存储服务，完美支持异步与回调策略
@@ -36,7 +36,7 @@
     <dependency>
         <groupId>com.github.zouchanglin</groupId>
         <artifactId>storage-spring-boot-starter</artifactId>
-        <version>v1.0</version>
+        <version>1.1</version>
     </dependency>
 </dependencies>
 ```
@@ -187,14 +187,80 @@ qiNiuUploadService.uploadLocalFile(localFilePath, descFileName, callBackUrl);
 #### 1、文件列表
 
 ```java
+@Autowired
+private QiNiuManageService qiNiuManageService;
 
+List<FileInfo> allFileList = qiNiuManageService.getAllFileList();
 ```
 
+#### 2、根据文件名搜索
 
+注意这个是从左往右全部匹配：
+
+```java
+@Autowired
+private QiNiuManageService qiNiuManageService;
+
+List<FileInfo> filesByPrefix = qiNiuManageService.getFilesByPrefix(key);
+```
+
+#### 3、批量修改文件MineType
+
+```java
+@Autowired
+private QiNiuBatchManageService qiNiuBatchManageService;
+
+Map<String, String> keyMineMap = new HashMap<>();
+keyMineMap.put("test.png", "image/png");
+keyMineMap.put("test.mp4", "image/png");
+keyMineMap.put("test.mp3", "application/zip");
+int changeItems = qiNiuBatchManageService.batchChangeMimeType(keyMineMap);
+```
+
+#### 4、批量复制文件
+
+```java
+@Autowired
+private QiNiuBatchManageService qiNiuBatchManageService;
+
+String[] keys = {"test.png", "test.gif", "test.mp4"};
+String suffix = "copy";
+int copyItems = qiNiuBatchManageService.batchCopyFile(keys, suffix);
+// test.png -> test.png.copy
+// test.gif -> test.gif.copy
+// test.mp4 -> test.mp4.copy
+```
+
+#### 5、批量重命名文件
+
+```java
+@Autowired
+private QiNiuBatchManageService qiNiuBatchManageService;
+
+Map<String, String> keyNewName = new HashMap<>();
+keyNewName.put("test.png", "new.png");
+keyNewName.put("test.mp4", "new.mp4");
+keyNewName.put("test.mp3", "new.mp3");
+int changeItems = qiNiuBatchManageService.batchRenameFile(keyNewName);
+```
+
+#### 6、批量删除文件
+
+```java
+@Autowired
+private QiNiuBatchManageService qiNiuBatchManageService;
+
+String[] keys = {"test.png", "test.gif", "test.mp4"};
+int changeItems = qiNiuBatchManageService.batchDeleteFile(keys);
+```
 
 
 # 版本更新
 
-### V1.0
+### 1.0
 
 支持七牛云的三种Token获取，文件、字节数组、流的上传，且支持断点续传。
+
+### 1.1
+
+支持单文件管理、文件批量管理。修复Bean装配问题的BUG。

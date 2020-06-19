@@ -1,4 +1,4 @@
-![logo](logo.png)
+![logo](https://img.zouchanglin.cn/storage-spring-boot-starter-logo.png)
 
 <div align="center">
 Immediately enjoy the easy-to-use storage service, perfect support asynchronous with callback strategy.
@@ -188,8 +188,85 @@ qiNiuUploadService.uploadLocalFile(localFilePath, descFileName, callBackUrl);
 
 The above example，http://example.com/upload/callback Interface to the received data is received in the form of POST ReturnBody object. Reference 3, Get carry callback url's token.
 
+### File (batch) management
+
+#### 1、All file list
+
+```java
+@Autowired
+private QiNiuManageService qiNiuManageService;
+
+List<FileInfo> allFileList = qiNiuManageService.getAllFileList();
+```
+
+#### 2、Search file by key
+
+Pay attention to this all match from left to right:
+
+```java
+@Autowired
+private QiNiuManageService qiNiuManageService;
+
+List<FileInfo> filesByPrefix = qiNiuManageService.getFilesByPrefix(key);
+```
+
+#### 3、Batch file's mineType modification 
+
+```java
+@Autowired
+private QiNiuBatchManageService qiNiuBatchManageService;
+
+Map<String, String> keyMineMap = new HashMap<>();
+keyMineMap.put("test.png", "image/png");
+keyMineMap.put("test.mp4", "image/png");
+keyMineMap.put("test.mp3", "application/zip");
+int changeItems = qiNiuBatchManageService.batchChangeMimeType(keyMineMap);
+```
+
+#### 4、Batch copy files
+
+```java
+@Autowired
+private QiNiuBatchManageService qiNiuBatchManageService;
+
+String[] keys = {"test.png", "test.gif", "test.mp4"};
+String suffix = "copy";
+int copyItems = qiNiuBatchManageService.batchCopyFile(keys, suffix);
+// test.png -> test.png.copy
+// test.gif -> test.gif.copy
+// test.mp4 -> test.mp4.copy
+```
+
+#### 5、Batch rename files
+
+```java
+@Autowired
+private QiNiuBatchManageService qiNiuBatchManageService;
+
+Map<String, String> keyNewName = new HashMap<>();
+keyNewName.put("test.png", "new.png");
+keyNewName.put("test.mp4", "new.mp4");
+keyNewName.put("test.mp3", "new.mp3");
+int changeItems = qiNiuBatchManageService.batchRenameFile(keyNewName);
+```
+
+#### 6、Batch delete files
+
+```java
+@Autowired
+private QiNiuBatchManageService qiNiuBatchManageService;
+
+String[] keys = {"test.png", "test.gif", "test.mp4"};
+int changeItems = qiNiuBatchManageService.batchDeleteFile(keys);
+```
+
 # Version update
 
-### V1.0
+### 1.0
 
 Support the seven NiuYun three Token, upload files, an array of bytes, flows and breakpoint continuingly support.
+
+### 1.1
+
+Support single file management, batch management. BUG fix Bean assembly problem.
+

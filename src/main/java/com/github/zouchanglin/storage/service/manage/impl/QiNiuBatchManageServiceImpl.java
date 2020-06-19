@@ -31,7 +31,15 @@ public class QiNiuBatchManageServiceImpl implements QiNiuBatchManageService {
             String newMimeType = entry.getValue();
             batchOperations.addChgmOp(qiNiuProperties.getBucketName(), key, newMimeType);
         }
+        return countChangeItem(batchOperations);
+    }
+
+    private int countChangeItem(BucketManager.BatchOperations batchOperations) {
         int retNumber = 0;
+        return countItemByOpt(batchOperations, retNumber);
+    }
+
+    private int countItemByOpt(BucketManager.BatchOperations batchOperations, int retNumber) {
         try {
             Response response = bucketManager.batch(batchOperations);
             BatchStatus[] batchStatusList = response.jsonToObject(BatchStatus[].class);
@@ -48,19 +56,7 @@ public class QiNiuBatchManageServiceImpl implements QiNiuBatchManageService {
     public int batchDeleteFile(String[] keys) {
         BucketManager.BatchOperations batchOperations = new BucketManager.BatchOperations();
         batchOperations.addDeleteOp(qiNiuProperties.getBucketName(), keys);
-        int retNumber = 0;
-        try {
-            Response response = bucketManager.batch(batchOperations);
-            BatchStatus[] batchStatusList = response.jsonToObject(BatchStatus[].class);
-            for(BatchStatus batchStatus: batchStatusList){
-                if(200 == batchStatus.code){
-                    retNumber++;
-                }
-            }
-        } catch (QiniuException qiniuException){
-            qiniuException.printStackTrace();
-        }
-        return retNumber;
+        return countChangeItem(batchOperations);
     }
 
     @Override
@@ -71,17 +67,7 @@ public class QiNiuBatchManageServiceImpl implements QiNiuBatchManageService {
         for (String key : keySet) {
             batchOperations.addMoveOp(qiNiuProperties.getBucketName(), key, qiNiuProperties.getBucketName(), nameMap.get(key));
         }
-        try {
-            Response response = bucketManager.batch(batchOperations);
-            BatchStatus[] batchStatusList = response.jsonToObject(BatchStatus[].class);
-            for(BatchStatus batchStatus: batchStatusList){
-                if(200 == batchStatus.code) retNumber++;
-            }
-        } catch (QiniuException qiniuException) {
-            qiniuException.printStackTrace();
-        }
-
-        return retNumber;
+        return countItemByOpt(batchOperations, retNumber);
     }
 
     @Override

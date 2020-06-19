@@ -2,23 +2,21 @@ package com.github.zouchanglin.storage.utils;
 
 import com.github.zouchanglin.storage.config.QiNiuProperties;
 import com.qiniu.storage.Region;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Resource;
 
 /**
  * 机房选择器
  * @author zouchanglin
  * @date 2020/6/4
  */
-
 @Configuration
+@EnableConfigurationProperties(QiNiuProperties.class)
 public class RegionSelector {
-    private final QiNiuProperties qiNiuProperties;
-
-    @Autowired
-    public RegionSelector(QiNiuProperties qiNiuProperties) {
-        this.qiNiuProperties = qiNiuProperties;
-    }
+    @Resource
+    private QiNiuProperties qiNiuProperties;
 
     public Region selectRegion(){
         String region = qiNiuProperties.getRegion();

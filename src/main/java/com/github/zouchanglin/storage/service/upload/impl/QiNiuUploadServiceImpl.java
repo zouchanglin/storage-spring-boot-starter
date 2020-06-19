@@ -23,22 +23,14 @@ import java.nio.file.Paths;
  */
 public class QiNiuUploadServiceImpl implements QiNiuUploadService {
 
-    private final QiNiuAuthService qiNiuAuthService;
-    private final QiNiuProperties qiNiuProperties;
-    private final Configuration configuration;
-    private final UploadManager uploadManager;
-
     @Autowired
-    public QiNiuUploadServiceImpl(QiNiuAuthService qiNiuAuthService,
-                                  QiNiuProperties qiNiuProperties,
-                                  Configuration configuration,
-                                  UploadManager uploadManager) {
-        this.qiNiuAuthService = qiNiuAuthService;
-        this.qiNiuProperties = qiNiuProperties;
-        this.configuration = configuration;
-        this.uploadManager = uploadManager;
-    }
-
+    private QiNiuAuthService qiNiuAuthService;
+    @Autowired
+    private QiNiuProperties qiNiuProperties;
+    @Autowired
+    private Configuration configuration;
+    @Autowired
+    private UploadManager uploadManager;
 
     @Override
     public ReturnBody uploadLocalFile(String filePath, String key, String callBackUrl) {

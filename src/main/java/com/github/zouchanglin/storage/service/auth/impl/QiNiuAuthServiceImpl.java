@@ -12,12 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date 2020/6/4
  */
 public class QiNiuAuthServiceImpl implements QiNiuAuthService {
-    private final QiNiuProperties qiNiuProperties;
-
     @Autowired
-    public QiNiuAuthServiceImpl(QiNiuProperties qiNiuProperties) {
-        this.qiNiuProperties = qiNiuProperties;
-    }
+    private QiNiuProperties qiNiuProperties;
 
     @Override
     public String getToken() {

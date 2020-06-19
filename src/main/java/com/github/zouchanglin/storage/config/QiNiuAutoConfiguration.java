@@ -4,13 +4,12 @@ import com.github.zouchanglin.storage.service.auth.QiNiuAuthService;
 import com.github.zouchanglin.storage.service.auth.impl.QiNiuAuthServiceImpl;
 import com.github.zouchanglin.storage.service.download.QiNiuDownloadService;
 import com.github.zouchanglin.storage.service.download.impl.QiNiuDownloadServiceImpl;
+import com.github.zouchanglin.storage.service.manage.QiNiuBatchManageService;
 import com.github.zouchanglin.storage.service.manage.QiNiuManageService;
+import com.github.zouchanglin.storage.service.manage.impl.QiNiuBatchManageServiceImpl;
 import com.github.zouchanglin.storage.service.manage.impl.QiNiuManageServiceImpl;
 import com.github.zouchanglin.storage.service.upload.QiNiuUploadService;
 import com.github.zouchanglin.storage.service.upload.impl.QiNiuUploadServiceImpl;
-import com.qiniu.storage.UploadManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,31 +18,11 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020/6/4
  */
 @Configuration
-@EnableConfigurationProperties(QiNiuProperties.class)
 public class QiNiuAutoConfiguration {
-    private final QiNiuProperties qiNiuProperties;
-
-    @Autowired
-    private QiNiuAuthService qiNiuAuthService;
-
-    @Autowired
-    private com.qiniu.storage.Configuration configuration;
-
-    @Autowired
-    private UploadManager uploadManager;
-
-    public QiNiuAutoConfiguration(QiNiuProperties qiNiuProperties) {
-        this.qiNiuProperties = qiNiuProperties;
-    }
 
     @Bean
     QiNiuAuthService qiNiuAuthService() {
-        return new QiNiuAuthServiceImpl(qiNiuProperties);
-    }
-
-    @Bean
-    QiNiuUploadService qiNiuUploadService() {
-        return new QiNiuUploadServiceImpl(qiNiuAuthService, qiNiuProperties, configuration, uploadManager);
+        return new QiNiuAuthServiceImpl();
     }
 
     @Bean
@@ -54,5 +33,15 @@ public class QiNiuAutoConfiguration {
     @Bean
     QiNiuManageService qiNiuManageService(){
         return new QiNiuManageServiceImpl();
+    }
+
+    @Bean
+    QiNiuBatchManageService qiNiuBatchManageService(){
+        return new QiNiuBatchManageServiceImpl();
+    }
+
+    @Bean
+    QiNiuUploadService qiNiuUploadService() {
+        return new QiNiuUploadServiceImpl();
     }
 }
