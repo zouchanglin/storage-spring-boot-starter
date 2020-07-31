@@ -1,5 +1,6 @@
 package com.github.zouchanglin.storage.service.auth;
 
+import com.github.zouchanglin.storage.service.upload.result.ReturnBody;
 import com.qiniu.util.Auth;
 
 /**
@@ -34,4 +35,20 @@ public interface QiNiuAuthService {
      * @return {@link Auth}
      */
     Auth getAuth();
+
+    //-----------------------------------------------------------
+    /**
+     * 客户端获取凭证 https://developer.qiniu.com/kodo/sdk/javascript
+     * @param returnBody 自定义ReturnBody
+     * @return token
+     */
+    String getToken(ReturnBody returnBody);
+
+    /**
+     * 客户端获取携带回调接口凭证
+     * @param callBackUrl 回调URL地址,如 http://example.com/callback/
+     * @param returnBody 自定义ReturnBody
+     * @return token
+     */
+    String getTokenCallBack(String callBackUrl, ReturnBody returnBody);
 }

@@ -3,6 +3,7 @@ package com.github.zouchanglin.storage.service.upload.impl;
 import com.github.zouchanglin.storage.config.QiNiuProperties;
 import com.github.zouchanglin.storage.service.auth.QiNiuAuthService;
 import com.github.zouchanglin.storage.service.upload.QiNiuUploadService;
+import com.github.zouchanglin.storage.service.upload.result.DefaultReturnBody;
 import com.github.zouchanglin.storage.service.upload.result.ReturnBody;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
@@ -36,7 +37,7 @@ public class QiNiuUploadServiceImpl implements QiNiuUploadService {
     public ReturnBody uploadLocalFile(String filePath, String key, String callBackUrl) {
         try {
             Response response = uploadManager.put(filePath, key, getToken(callBackUrl));
-            return new Gson().fromJson(response.bodyString(), ReturnBody.class);
+            return new Gson().fromJson(response.bodyString(), DefaultReturnBody.class);
         } catch (QiniuException qiniuException) {
             return null;
         }
@@ -46,7 +47,7 @@ public class QiNiuUploadServiceImpl implements QiNiuUploadService {
     public ReturnBody uploadByteArray(byte[] byteArray, String key, String callBackUrl) {
         try {
             Response response = uploadManager.put(byteArray, key, getToken(callBackUrl));
-            return new Gson().fromJson(response.bodyString(), ReturnBody.class);
+            return new Gson().fromJson(response.bodyString(), DefaultReturnBody.class);
         } catch (QiniuException ex) {
             return null;
         }
@@ -56,7 +57,7 @@ public class QiNiuUploadServiceImpl implements QiNiuUploadService {
     public ReturnBody uploadStream(InputStream inputStream, String key, String callBackUrl) {
         try {
             Response response = uploadManager.put(inputStream, key, getToken(callBackUrl), null, null);
-            return new Gson().fromJson(response.bodyString(), ReturnBody.class);
+            return new Gson().fromJson(response.bodyString(), DefaultReturnBody.class);
         } catch (QiniuException ex) {
             return null;
         }
@@ -76,7 +77,7 @@ public class QiNiuUploadServiceImpl implements QiNiuUploadService {
         try {
             Response response = uploadManager.put(filePath, key, getToken(callBackUrl));
             //解析上传成功的结果
-            return new Gson().fromJson(response.bodyString(), ReturnBody.class);
+            return new Gson().fromJson(response.bodyString(), DefaultReturnBody.class);
         } catch (QiniuException ex) {
             return null;
         }
