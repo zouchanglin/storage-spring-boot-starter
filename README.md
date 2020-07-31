@@ -270,3 +270,5 @@ Support the seven NiuYun three Token, upload files, an array of bytes, flows and
 
 Support single file management, batch management. BUG fix Bean assembly problem.
 
+### 1.2
+Support custom ReturnBody, that is, when the callback can bring their own custom data.

@@ -264,3 +264,6 @@ int changeItems = qiNiuBatchManageService.batchDeleteFile(keys);
 ### 1.1
 
 支持单文件管理、文件批量管理。修复Bean装配问题的BUG。
+
+### 1.2
+支持自定义ReturnBody，也就是回调时可以携带自己的自定义数据。
